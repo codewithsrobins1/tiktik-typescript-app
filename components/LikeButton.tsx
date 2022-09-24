@@ -6,14 +6,27 @@ import useAuthStore from '../store/authStore';
 interface IProps {
 	handleLike: () => void;
 	handleDislike: () => void;
+	likes: any[];
 }
 
-const LikeButton = ({ handleLike, handleDislike }: IProps) => {
-	const [alreadyLiked, setAlreadyLiked] = useState(true);
-	const { userProfile } = useAuthStore();
+const LikeButton = ({ likes, handleLike, handleDislike }: IProps) => {
+	const [alreadyLiked, setAlreadyLiked] = useState(false);
+	const { userProfile }: any = useAuthStore();
+	const filteredLikes = likes?.filter((item) => item._ref === userProfile?._id)
+
+	console.log(alreadyLiked)
+
+	useEffect(() => {
+		//If user did like post, set alreadylike to true
+		if (filteredLikes?.length > 0) {
+			setAlreadyLiked(true);
+		} else {
+			setAlreadyLiked(false);
+		}
+	}, [filteredLikes, likes])
 
 	return (
-		<div className="gap-6">
+		<div className="flex gap-6">
 			<div className="mt-4 flex flex-col justify-center items-center cursor-pointer">
 				{alreadyLiked ? (
 					<div className="bg-primary rounded-full p-2 md:p-4 text-[#F51997]" onClick={handleDislike}>
@@ -25,7 +38,7 @@ const LikeButton = ({ handleLike, handleDislike }: IProps) => {
 					</div>	
 				)}
 				<p className="text-md font-semibold">
-					likes?.length || 0
+					{likes?.length || 0}
 				</p>
 			</div>
 		</div>
