@@ -54,7 +54,7 @@ const UserProfile = ({ data }: IProps) => {
 			  </div>
 		</div>
 		
-		<div className="">
+		<div>
 			<div className="flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full">
 				<p onClick={() => setShowUserVideos(true)} className={`text-xl font-semibold cursor-pointer mt-2 ${videosBtnStyles}`}>Videos</p>
 				<p onClick={() => setShowUserVideos(false)} className={`text-xl font-semibold cursor-pointer mt-2 ${likedBtnStyles}`}>Liked</p>
